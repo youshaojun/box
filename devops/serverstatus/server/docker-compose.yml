@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  serverstatus:
+    restart: always
+    container_name: serverstatus
+    volumes:
+      - './config.json:/ServerStatus/server/config.json'
+      - './serverstatus-monthtraffic:/usr/share/nginx/html/json'
+    ports:
+      - '8880:80'
+      - '35601:35601'
+    image: 'cppla/serverstatus:latest'

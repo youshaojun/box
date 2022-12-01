@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+  uptimekuma:
+    image: louislam/uptime-kuma
+    ports:
+      - '8002:3001'
+    container_name: uptimekuma
+    restart: always

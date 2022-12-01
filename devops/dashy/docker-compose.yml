@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  dashy:
+    image: lissy93/dashy:latest
+    ports:
+      - '8001:80'
+    container_name: dashy
+    restart: always
+    volumes:
+      - './public:/app/public'

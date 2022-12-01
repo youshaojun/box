@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  minio:
+    image: minio/minio:latest
+    ports:
+      - '9000:9000'
+      - '9007:9001'
+    container_name: minio
+    restart: always
+    volumes:
+      - './data:/data'
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=Ysj123456
+    command: server /data --console-address ":9001"

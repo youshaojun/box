@@ -1,0 +1,37 @@
+version: '3.3'
+
+networks:
+  heartzbeat:
+    driver: bridge
+
+services:
+  TDengine:
+    image: 'tdengine/tdengine:2.4.0.12'
+    container_name: tdengine
+    hostname: tdengine
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - '6030-6049:6030-6049'
+      - '6030-6049:6030-6049/udp'
+    volumes:
+      - './dbdata/taosdata:/var/lib/taos/'
+    networks:
+      - heartzbeat
+
+  hertzbeat:
+    image: 'tancloud/hertzbeat'
+    container_name: hertzbeat
+    hostname: hertzbeat
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      LANG: zh_CN.UTF-8
+    volumes:
+      - './conf/application.yml:/opt/hertzbeat/config/application.yml'
+      - './conf/sureness.yml:/opt/hertzbeat/config/sureness.yml'
+    ports:
+      - "1157:1157"
+    networks:
+      - heartzbeat

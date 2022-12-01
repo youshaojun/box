@@ -1,0 +1,40 @@
+{
+  "servers": [
+    {
+      "username": "s01",
+      "name": "node1",
+      "type": "xen",
+      "host": "host1",
+      "location": "China",
+      "region": "CN",
+      "password": "USER_DEFAULT_PASSWORD",
+      "monthstart": 1
+    }
+  ],
+  "watchdog": [
+    {
+      "name": "cpu high warning",
+      "rule": "cpu>98",
+      "interval": 600,
+      "callback": "https://yourSMSurl"
+    },
+    {
+      "name": "memory high warning",
+      "rule": "(memory_used/memory_total)*100>90",
+      "interval": 600,
+      "callback": "https://yourSMSurl"
+    },
+    {
+      "name": "offline warning",
+      "rule": "online4=0&online6=0",
+      "interval": 300,
+      "callback": "https://yourSMSurl"
+    },
+    {
+      "name": "you can parse an expression combining any known field",
+      "rule": "load_5>10",
+      "interval": 1800,
+      "callback": "https://yourSMSurl"
+    }
+  ]
+}

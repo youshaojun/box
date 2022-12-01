@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  qinglong:
+    volumes:
+      - './ql:/ql/data'
+    ports:
+      - '5700:5700'
+      - '5701:5701'
+    environment:
+      - ENABLE_HANGUP=true
+      - ENABLE_TG_BOT=true
+      - ENABLE_WEB_PANEL=true
+    container_name: qinglong
+    restart: always
+    image: 'whyour/qinglong:latest'

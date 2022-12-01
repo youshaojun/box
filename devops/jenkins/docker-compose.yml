@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  blueocean:
+    ports:
+      - '9095:8080'
+      - '50000:50000'
+    container_name: jenkins
+    volumes:
+      - '/home/jenkins_home:/var/jenkins_home'
+      - '/etc/localtime:/etc/localtime'
+      - '/home/project/apache-maven-3.5.4:/usr/local/maven'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    image: jenkinsci/blueocean

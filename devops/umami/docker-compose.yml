@@ -1,0 +1,12 @@
+version: '3'
+services:
+  umami:
+    image: ghcr.io/umami-software/umami:mysql-latest
+    container_name: umami
+    ports:
+      - "9003:3000"
+    environment:
+      DATABASE_URL: mysql://umami:umami@mysql_addr/umami
+      DATABASE_TYPE: mysql
+      #HASH_SALT: replace-me-with-a-random-string
+    restart: always

@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    container_name: redis
+    volumes:
+      - './conf:/etc/redis'
+      - './data:/data'
+    command:
+      # - /bin/bash
+      # - -c
+      - --requirepass "Ysj666666"

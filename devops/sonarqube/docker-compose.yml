@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  sonarqube:
+    image: sonarqube:9.1.0-community
+    container_name: sonarqube
+    restart: always
+    ports:
+      - '9005:9000'
+    volumes:
+      - './data:/opt/sonarqube/data'
+      - './logs:/opt/sonarqube/logs'
+      - './extensions:/opt/sonarqube/extensions'
+    environment:
+      - SONARQUBE_JDBC_USERNAME=root
+      - SONARQUBE_JDBC_PASSWORD=root
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://120.48.79.88:5432/sonarqube
