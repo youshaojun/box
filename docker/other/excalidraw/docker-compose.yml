@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  excalidraw:
+    ports:
+      - '8099:80'
+    environment:
+      - TZ=Asia/Shanghai
+#      - PUID=1000
+#      - PGID=1000
+    restart: unless-stopped
+    image: ddsderek/excalidraw:latest

@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+#  db:
+#    image: mariadb
+#    command: --max-allowed-packet=64MB
+#    restart: always
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=${PASSWORD}
+#    volumes:
+#      - db:/var/lib/mysql
+
+  code-server:
+#    depends_on:
+#      - db
+    image: codercom/code-server
+    restart: always
+    hostname: code-server
+    container_name: code-server
+    environment:
+      - PASSWORD:${PASSWORD}
+    ports:
+      - '8080:8080'
+    volumes:
+      - coder-data:/home/coder
+
+volumes:
+  db:
+#    external: true
+#    name: db
+  coder-data:

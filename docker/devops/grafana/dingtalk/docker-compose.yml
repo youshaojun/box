@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  prometheus-webhook-dingtalk:
+    ports:
+      - '8060:8060'
+    volumes:
+      - './template:/usr/share/prometheus-webhook-dingtalk/template'
+      - './conf:/usr/share/prometheus-webhook-dingtalk'
+    restart: always
+    container_name: webhook-dingtalk
+    image: timonwong/prometheus-webhook-dingtalk

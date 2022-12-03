@@ -1,0 +1,13 @@
+version: '3.3'
+
+services:
+  homeassistant:
+    container_name: home-assistant
+    image: homeassistant/home-assistant:stable
+    ports:
+      - 8123:8123
+#    volumes:
+#      - /PATH_TO_YOUR_CONFIG:/config
+    environment:
+      - TZ=Asia/Shanghai
+    restart: always

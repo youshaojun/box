@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+  apm-server:
+    depends_on:
+      es:
+        condition: service_healthy
+      kibana:
+        condition: service_healthy
+    image: docker.elastic.co/apm/apm-server:${STACK_VERSION}
+    cap_add:
+      - 'ALL'
+    cap_drop:
+      - 'ALL'
+    ports:
+      - 8200:8200
+    volumes:
+      - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
+    # command: >
+    #   apm-server -e
+    #     -E apm-server.rum.enabled=true
+    #     -E apm-server.secret_token=${ELASTIC_PASSWORD}
+    #     -E setup.kibana.host=${HOST}:5601
+    #     -E setup.template.settings.index.number_of_replicas=0
+    #     -E apm-server.kibana.enabled=true
+    #     -E apm-server.kibana.host=${HOST}:5601
+    #     -E apm-server.kibana.username=elastic
+    #     -E apm-server.kibana.password=${ELASTIC_PASSWORD}
+    #     -E output.elasticsearch.hosts=["${HOST}:9200"]
+    #     -E output.elasticsearch.username=elastic
+    #     -E output.elasticsearch.password=${ELASTIC_PASSWORD}
+    healthcheck:
+      interval: 10s
+      retries: 12
+      test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:8200/

@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  ztncui:
+    user: root
+    restart: 'on-failure:3'
+    container_name: ztncui
+    image: keynetworks/ztncui
+    environment:
+      - HTTP_PORT=4000
+      - HTTP_ALL_INTERFACES=yes
+      - ZTNCUI_PASSWD=admin@123
+    ports:
+      - '4000:4000'
+
+#  zerotier-moon:
+#    user: root
+#    restart: 'on-failure:3'
+#    container_name: zerotier-moon
+#    image: jonnyan404/zerotier-moon
+#    depends_on:
+#      - ztncui
+#    ports:
+#      - '9993:9993'
+#      - '9993:9993/udp'

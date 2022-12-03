@@ -1,0 +1,13 @@
+# 视频下载器
+version: '3.3'
+services:
+  alltube:
+    container_name: alltube
+    ports:
+      - '5993:80'
+    environment:
+#      - PUID=0    # 在终端输入id可以查看当前用户的id
+#      - PGID=0    # 同上
+      - TZ=Asia/Shanghai
+    restart: always
+    image: rudloff/alltube

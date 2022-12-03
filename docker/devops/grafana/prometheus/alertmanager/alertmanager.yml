@@ -1,0 +1,31 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: 'smtp.163.com:25'
+  smtp_from: 'youshaojunde@163.com'
+  smtp_auth_username: 'youshaojunde@163.com'
+  smtp_auth_password: 'smtp_auth_password'
+  smtp_require_tls: false
+  #templates:          #默认Alertmanager使用系统自带的默认通知模板 ，用户也可在此自定义模板
+  #  - '/alertmanager/template/*.tmpl'
+route:                   #顶级路由必须匹配所有报警，因为他要接受所有报警，再分匹配到分支路由上
+  group_by: ['alertname']   #满足group_by中定义标签名称，那么这些告警将会合并为一个通知发送给接收器。
+  group_wait: 10s              #同一group的等待时间，在等待时间内当前group接收到了新的告警，这些告警将会合并为一个通知向receiver发送
+  group_interval: 10s         #同一Gourp发送告警通知的时间间隔  receiver: 'default-receiver'
+  repeat_interval: 1h     #在连续告警触发的情况下，重复发送告警的时间间隔
+  receiver: 'default-receiver'
+receivers:
+  - name: 'default-receiver'
+    webhook_configs:
+      url: 'http://127.0.0.1:8060/dingtalk/webhook1/send'
+      mention:
+        all: true
+      send_resolved: true
+    email_configs:
+      - to: 'youshaojunde@163.com'
+        send_resolved: true  #告警解除发送恢复通知
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alername','dev','instance']

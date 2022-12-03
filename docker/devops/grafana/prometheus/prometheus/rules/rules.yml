@@ -1,0 +1,16 @@
+groups:
+  - name: Warning
+    rules:
+      - alert: web-server-status
+        # 名称为web-server的任务状态为0表示宕机
+        expr: up{job="web-server"} == 0
+        # 服务状态转移时间间隔
+        # Inactive -> Pending -> Firing
+        # 当状态为Firing是会发送告警邮件
+        for: 10s
+        labels:
+          status: Warning
+          severity: 1
+        annotations:
+          summary: "{{$labels.instance}}: 服务宕机"
+          description: "{{$labels.instance}}: 服务中断超过10s"

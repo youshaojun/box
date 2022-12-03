@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  nexus:
+    image: 'sonatype/nexus3'
+    container_name: nexus
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - '8931:8081'
+    volumes:
+      - 'nexus-data:/nexus-data'
+
+volumes:
+  nexus-data:

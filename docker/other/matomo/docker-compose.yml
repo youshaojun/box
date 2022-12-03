@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  db:
+    image: mariadb
+    command: --max-allowed-packet=64MB
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - db:/var/lib/mysql
+
+  app:
+    image: matomo
+    restart: always
+    # volumes:
+      #     - ./config:/var/www/html/config
+      #     - ./logs:/var/www/html/logs
+      #     - /root/data/docker_data/matomo/matomo/html:/var/www/html
+    ports:
+      - 8080:80
+      - 8443:443
+volumes:
+  db:
+  matomo:
