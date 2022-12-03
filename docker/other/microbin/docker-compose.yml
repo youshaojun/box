@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  microbin:
+    image: danielszabo99/microbin:latest
+    container_name: microbin
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - MICROBIN_HIGHLIGHTSYNTAX=true
+      - MICROBIN_HASH_IDS=true
+      - MICROBIN_EDITABLE=true
+      - MICROBIN_PRIVATE=false
+      - MICROBIN_HIDE_FOOTER=true
+      - MICROBIN_HELP=true
+      - MICROBIN_HIDE_HEADER=true
+      - MICROBIN_HIDE_LOGO=false
+      - MICROBIN_NO_ETERNAL_PASTA=false
+      - MICROBIN_NO_FILE_UPLOAD=false
+      - MICROBIN_NO_LISTING=true
+      - MICROBIN_THREADS=2
+      - MICROBIN_TITLE=free-bin
+      - MICROBIN_PUBLIC_PATH=127.0.0.1
+      - MICROBIN_QR=true
+    ports:
+      - 8080:8080
+    volumes:
+      - ./microbin-data:/app/pasta_data

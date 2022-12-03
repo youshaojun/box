@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  # The default credentials are:
+  # username: backuppc
+  # password: password
+  backuppc:
+    image: adferrand/backuppc
+    container_name: backuppc
+    ports:
+      - '8080:8080'
+    volumes:
+      - backuppc-data:/etc/backuppc
+      - backuppc-data:/home/backuppc
+      - backuppc-data:/data/backuppc
+
+volumes:
+  backuppc-data:

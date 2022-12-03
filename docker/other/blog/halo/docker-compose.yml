@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  halo:
+    # 主题 https://halo.run/themes.html
+    # joe2.0主题配置 https://qinhua.github.io/halo-theme-joe2.0/#/
+    restart: unless-stopped
+    container_name: halo
+    image: 'halohub/halo:1.5.2'
+    ports:
+      - '8090:8090'
+    volumes:
+      - 'halo:/root/.halo'
+
+volumes:
+  halo:
