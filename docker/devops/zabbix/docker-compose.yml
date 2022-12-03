@@ -1,0 +1,91 @@
+version: '3.3'
+services:
+  mysql-server-zabbix:
+    image: mysql:5.7
+    container_name: mysql-server-zabbix
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    environment:
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=zabbix
+    ports:
+      - 3306:3306
+    volumes:
+#      - ./data:/var/lib/mysql
+      - /etc/localtime:/etc/localtime
+      - /etc/timezone:/etc/timezone
+  zabbix-server-mysql:
+    image: zabbix/zabbix-server-mysql:latest
+    container_name: zabbix-server-mysql
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    privileged: true
+    cap_add:
+      - ALL
+    restart: always
+    environment:
+      - DB_SERVER_HOST=mysql-server-zabbix
+      - MYSQL_USER=zabbix
+      - ZBX_CACHESIZE=4096M
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_ROOT_PASSWORD=zabbix
+    ports:
+      - 10051:10051
+    sysctls:
+      - net.ipv4.ip_local_port_range=1024 65000
+      - net.ipv4.conf.all.accept_redirects=0
+      - net.ipv4.conf.all.secure_redirects=0
+      - net.ipv4.conf.all.send_redirects=0
+    links:
+      - mysql-server-zabbix:mysql
+    depends_on:
+      - mysql-server-zabbix
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /etc/timezone:/etc/timezone
+      - zabbix-server-conf:/etc/zabbix
+      - zabbix-server-alertscripts:/usr/lib/zabbix/alertscripts
+
+  # admin/zabbix
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-mysql:latest
+    environment:
+      - DB_SERVER_HOST=mysql-server-zabbix
+      - MYSQL_USER=zabbix
+      - PHP_TZ=Asia/Shanghai
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_DATABASE=zabbix
+      - MYSQL_ROOT_PASSWORD=zabbix
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /etc/timezone:/etc/timezone
+    links:
+      - mysql-server-zabbix:mysql
+      - zabbix-server-mysql:zabbix-server
+    depends_on:
+      - mysql-server-zabbix
+      - zabbix-server-mysql
+  zabbix-agent:
+    image: zabbix/zabbix-agent
+    privileged: true
+    restart: always
+    cap_add:
+      - ALL
+    volumes:
+      - /etc/timezone:/etc/timezone
+    environment:
+      ZBX_SERVER_HOST: zabbix-server-mysql
+    ports:
+      - '10050:10050'
+volumes:
+  zabbix-server-conf:
+  zabbix-server-alertscripts:

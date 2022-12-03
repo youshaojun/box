@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  canal-server:
+    image: canal/canal-server:v1.1.5
+    container_name: canal-server
+    ports:
+      #canal默认端口号
+      - 11111:11111
+    environment:
+      #设置从库id，不能与主库id相冲突
+      - canal.instance.mysql.slaveId=222
+      - canal.instance.master.address=数据库地址:3306
+      # mysql 复制账号
+      - canal.instance.dbUsername=数据登录名
+      - canal.instance.dbPassword=数据库登录密码
+      - canal.mq.topic=loginLogCanalTopic
+      #数据库名.表名
+      - canal.instance.filter.regex=cyb-sp.login_log
+    volumes:
+      - canal-data-conf:/usr/local/dockercompose/canal/conf/
+      - canal-data-logs:/usr/local/dockercompose/canal/logs/
+
+volumes:
+  canal-data-conf:
+  canal-data-logs:
