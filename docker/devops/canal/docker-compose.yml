@@ -1,4 +1,6 @@
 version: '3.3'
+
+# binlog增量订阅
 services:
   canal-server:
     image: canal/canal-server:v1.1.5

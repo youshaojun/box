@@ -1,0 +1,41 @@
+version: '3.3'
+
+# 接口管理平台
+# 账号密码: test@test.com/ymfe.org
+services:
+  yapi:
+    image: mrjin/yapi
+    container_name: yapi
+    environment:
+      - VERSION=1.10.2
+      - LOG_PATH=/tmp/yapi.log
+      - HOME=/home
+      - PORT=3000
+      - ADMIN_EMAIL=test@test.com
+      - DB_SERVER=mongo
+      - DB_NAME=yapi
+      - DB_PORT=27017
+    ports:
+      - 3000:3000
+    volumes:
+      - yapi-log:/home/vendors/log
+    depends_on:
+      - mongo
+    entrypoint: "bash /wait-for-it.sh mongo:27017 -- entrypoint.sh"
+    networks:
+      - yapi
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-yapi:/data/db
+    networks:
+      - yapi
+networks:
+  yapi:
+
+volumes:
+  yapi-log:
+  mongo-yapi:

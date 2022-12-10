@@ -1,4 +1,6 @@
 version: '3.3'
+
+# 音乐服务器
 services:
   navidrome:
     image: deluan/navidrome:latest

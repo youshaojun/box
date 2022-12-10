@@ -1,4 +1,6 @@
 version: '3.3'
+
+# maven私服
 services:
   nexus:
     image: 'sonatype/nexus3'

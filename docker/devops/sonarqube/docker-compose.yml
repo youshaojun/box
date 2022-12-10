@@ -1,4 +1,7 @@
 version: '3.3'
+
+# 代码审查
+# 账号密码: admin/admin
 services:
   sonarqube:
     image: sonarqube:9.1.0-community

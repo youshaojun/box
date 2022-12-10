@@ -1,4 +1,6 @@
 version: '3.3'
+
+# 埋点
 services:
   webfunny_monitor:
     image: webfunny/webfunny_monitor:3.1.22-beta

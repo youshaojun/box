@@ -1,9 +1,6 @@
 version: '3.3'
 
-volumes:
-  nextcloud:
-  db:
-
+# 云盘
 services:
   db:
     image: mariadb:10.5
@@ -31,3 +28,7 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db
+
+volumes:
+  nextcloud:
+  db:

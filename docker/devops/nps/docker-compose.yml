@@ -1,0 +1,23 @@
+version: '3.3'
+
+# 内网穿透工具
+# 账号密码在nps.conf, 默认 admin/123
+services:
+  nps:
+    image: ffdfgdfg/nps
+    container_name: nps
+    restart: unless-stopped
+    volumes:
+      - './conf:/conf'
+    environment:
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    ports:
+      - '8080:8080'
+      - '8024:8024'
+      - '8100-8200:8100-8200'
+    networks:
+      - nps
+
+networks:
+    nps:

@@ -1,4 +1,6 @@
 version: '3.3'
+
+# 对象存储服务
 services:
   minio:
     image: minio/minio:latest

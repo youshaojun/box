@@ -1,4 +1,6 @@
-version: "3.3"
+version: '3.3'
+
+# Docker 容器管理平台
 services:
   portainer:
     image: portainer/portainer:latest
