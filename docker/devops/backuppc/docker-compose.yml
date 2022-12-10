@@ -11,9 +11,11 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - backuppc-data:/etc/backuppc
-      - backuppc-data:/home/backuppc
+      - backuppc-etc:/etc/backuppc
+      - backuppc-home:/home/backuppc
       - backuppc-data:/data/backuppc
 
 volumes:
+  backuppc-etc:
+  backuppc-home:
   backuppc-data:
