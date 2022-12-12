@@ -3,11 +3,11 @@ version: '3.3'
 # https://www.elastic.co/guide/en/elasticsearch/reference/7.17/docker.html
 services:
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    image: ${STACK_IMAGE}
     container_name: es01
     environment:
       - node.name=es01
-      - cluster.name=es-docker-cluster
+      - cluster.name=${CLUSTER_NAME}
       - discovery.seed_hosts=es02,es03
       - cluster.initial_master_nodes=es01,es02,es03
       - bootstrap.memory_lock=true
@@ -18,16 +18,17 @@ services:
         hard: -1
     volumes:
       - data01:/usr/share/elasticsearch/data
+      - ./plugins:/usr/share/elasticsearch/plugins
     ports:
       - 9200:9200
     networks:
       - elastic
   es02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    image: ${STACK_IMAGE}
     container_name: es02
     environment:
       - node.name=es02
-      - cluster.name=es-docker-cluster
+      - cluster.name=${CLUSTER_NAME}
       - discovery.seed_hosts=es01,es03
       - cluster.initial_master_nodes=es01,es02,es03
       - bootstrap.memory_lock=true
@@ -38,14 +39,15 @@ services:
         hard: -1
     volumes:
       - data02:/usr/share/elasticsearch/data
+      - ./plugins:/usr/share/elasticsearch/plugins
     networks:
       - elastic
   es03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    image: ${STACK_IMAGE}
     container_name: es03
     environment:
       - node.name=es03
-      - cluster.name=es-docker-cluster
+      - cluster.name=${CLUSTER_NAME}
       - discovery.seed_hosts=es01,es02
       - cluster.initial_master_nodes=es01,es02,es03
       - bootstrap.memory_lock=true
@@ -56,6 +58,7 @@ services:
         hard: -1
     volumes:
       - data03:/usr/share/elasticsearch/data
+      - ./plugins:/usr/share/elasticsearch/plugins
     networks:
       - elastic
 
@@ -75,9 +78,6 @@ services:
     environment:
       - SERVERNAME=kibana
       - ELASTICSEARCH_HOSTS=http://es01:9200
-      - ELASTICSEARCH_USERNAME=kibana_system
-      - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
-      - xpack.apm.enabled=false
     mem_limit: ${MEM_LIMIT}
     cap_add:
       - ALL
