@@ -11,4 +11,4 @@ services:
       DATABASE_URL: mysql://umami:umami@mysql_addr/umami
       DATABASE_TYPE: mysql
       #HASH_SALT: replace-me-with-a-random-string
-    restart: always
+    restart: unless-stopped

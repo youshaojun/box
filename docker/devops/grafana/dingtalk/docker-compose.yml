@@ -6,6 +6,6 @@ services:
     volumes:
       - './template:/usr/share/prometheus-webhook-dingtalk/template'
       - './conf:/usr/share/prometheus-webhook-dingtalk'
-    restart: always
+    restart: unless-stopped
     container_name: webhook-dingtalk
     image: timonwong/prometheus-webhook-dingtalk

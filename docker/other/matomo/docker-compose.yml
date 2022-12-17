@@ -5,7 +5,7 @@ services:
   db:
     image: mariadb
     command: --max-allowed-packet=64MB
-    restart: always
+    restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
     volumes:
@@ -13,7 +13,7 @@ services:
 
   app:
     image: matomo
-    restart: always
+    restart: unless-stopped
     # volumes:
       #     - ./config:/var/www/html/config
       #     - ./logs:/var/www/html/logs

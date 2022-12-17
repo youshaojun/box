@@ -1,0 +1,15 @@
+version: '3.3'
+
+#  文件快递柜 https://github.com/vastsa/FileCodeBox
+services:
+  filecodebox:
+    container_name: filecodebox
+    image: 'lanol/filecodebox:latest'
+    restart: unless-stopped
+    ports:
+      - '12345:12345'
+    volumes:
+      - 'filecodebox-data:/app/data'
+
+volumes:
+  filecodebox-data:

@@ -10,5 +10,5 @@ services:
 #      - PUID=0    # 在终端输入id可以查看当前用户的id
 #      - PGID=0    # 同上
       - TZ=Asia/Shanghai
-    restart: always
+    restart: unless-stopped
     image: rudloff/alltube

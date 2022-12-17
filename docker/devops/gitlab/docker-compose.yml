@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   redis:
-    restart: always
+    restart: unless-stopped
     image: redis:6.2.6
     command:
       - --loglevel warning
@@ -10,7 +10,7 @@ services:
       - redis-data:/data:Z
 
   postgresql:
-    restart: always
+    restart: unless-stopped
     image: sameersbn/postgresql:12-20200524
     volumes:
       - postgresql-data:/var/lib/postgresql:Z
@@ -21,7 +21,7 @@ services:
       - DB_EXTENSION=pg_trgm,btree_gist
 
   gitlab:
-    restart: always
+    restart: unless-stopped
     image: sameersbn/gitlab:15.6.1
     depends_on:
       - redis

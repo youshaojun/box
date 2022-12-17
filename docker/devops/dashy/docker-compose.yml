@@ -7,6 +7,6 @@ services:
     ports:
       - '8001:80'
     container_name: dashy
-    restart: always
+    restart: unless-stopped
     volumes:
       - './public:/app/public'

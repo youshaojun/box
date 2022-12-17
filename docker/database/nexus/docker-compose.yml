@@ -5,7 +5,7 @@ services:
   nexus:
     image: 'sonatype/nexus3'
     container_name: nexus
-    restart: always
+    restart: unless-stopped
     environment:
       - TZ=Asia/Shanghai
     ports:

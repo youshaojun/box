@@ -3,7 +3,7 @@ services:
   prometheus:
     ports:
       - '9090:9090'
-    restart: always
+    restart: unless-stopped
     container_name: prometheus
     volumes:
       - './prometheus.yml:/etc/prometheus/prometheus.yml'

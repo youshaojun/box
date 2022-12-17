@@ -7,7 +7,7 @@ services:
     image: mysql
     container_name: mysql-server-zabbix
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
-    restart: always
+    restart: unless-stopped
     environment:
       - MYSQL_DATABASE=zabbix
       - MYSQL_USER=zabbix
@@ -30,7 +30,7 @@ services:
     privileged: true
     cap_add:
       - ALL
-    restart: always
+    restart: unless-stopped
     environment:
       - DB_SERVER_HOST=mysql-server-zabbix
       - MYSQL_USER=zabbix
@@ -65,7 +65,7 @@ services:
       - MYSQL_PASSWORD=zabbix
       - MYSQL_DATABASE=zabbix
       - MYSQL_ROOT_PASSWORD=zabbix
-    restart: always
+    restart: unless-stopped
     ports:
       - 8080:8080
     volumes:
@@ -80,7 +80,7 @@ services:
   zabbix-agent:
     image: zabbix/zabbix-agent
     privileged: true
-    restart: always
+    restart: unless-stopped
     cap_add:
       - ALL
     volumes:

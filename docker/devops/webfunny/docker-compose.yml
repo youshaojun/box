@@ -4,7 +4,7 @@ version: '3.3'
 services:
   webfunny_monitor:
     image: webfunny/webfunny_monitor:3.1.22-beta
-    restart: always
+    restart: unless-stopped
     container_name: webfunny_monitor
     volumes:
       - './app:/app'

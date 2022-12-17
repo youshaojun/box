@@ -6,7 +6,7 @@ services:
     image: 'tdengine/tdengine:2.4.0.12'
     container_name: tdengine
     hostname: tdengine
-    restart: always
+    restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
     ports:
@@ -21,7 +21,7 @@ services:
     image: 'tancloud/hertzbeat'
     container_name: hertzbeat
     hostname: hertzbeat
-    restart: always
+    restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
       LANG: zh_CN.UTF-8

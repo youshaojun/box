@@ -7,4 +7,4 @@ services:
     ports:
       - '8002:3001'
     container_name: uptimekuma
-    restart: always
+    restart: unless-stopped

@@ -6,7 +6,7 @@ services:
   sonarqube:
     image: sonarqube:9.1.0-community
     container_name: sonarqube
-    restart: always
+    restart: unless-stopped
     ports:
       - '9005:9000'
     volumes:

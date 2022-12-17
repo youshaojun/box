@@ -11,4 +11,4 @@ services:
 #      - /PATH_TO_YOUR_CONFIG:/config
     environment:
       - TZ=Asia/Shanghai
-    restart: always
+    restart: unless-stopped

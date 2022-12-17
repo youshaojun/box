@@ -5,7 +5,7 @@ services:
 #  db:
 #    image: mariadb
 #    command: --max-allowed-packet=64MB
-#    restart: always
+#    restart: unless-stopped
 #    environment:
 #      - MYSQL_ROOT_PASSWORD=${PASSWORD}
 #    volumes:
@@ -15,7 +15,7 @@ services:
 #    depends_on:
 #      - db
     image: codercom/code-server
-    restart: always
+    restart: unless-stopped
     hostname: code-server
     container_name: code-server
     environment:

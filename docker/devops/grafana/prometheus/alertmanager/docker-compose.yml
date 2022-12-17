@@ -3,7 +3,7 @@ services:
   alertmanager:
     ports:
       - '9093:9093'
-    restart: always
+    restart: unless-stopped
     container_name: alertmanager
     volumes:
       - './alertmanager.yml:/etc/alertmanager/alertmanager.yml'

@@ -3,7 +3,7 @@ version: '3.3'
 # 内网穿透工具
 services:
   frps:
-    restart: always
+    restart: unless-stopped
     network_mode: host
     volumes:
       - './frps.ini:/etc/frp/frps.ini'
