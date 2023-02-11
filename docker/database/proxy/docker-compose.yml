@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  shardingsphere-proxy:
+    environment:
+      TZ: 'Asia/Shanghai'
+    image: apache/shardingsphere-proxy:5.3.1
+    restart: unless-stopped
+    ports:
+      - '3307:3307'
+    container_name: shardingsphere-proxy
+    volumes:
+      # config-database-discovery.yaml  动态数据库接入配置
+      # config-encrypt.yaml  加密及连接授权配置
+      # config-mask.yaml  屏蔽规则配置
+      # config-readwrite-splitting.yaml  读写分离配置
+      # config-shadow.yaml  影子库配置
+      # config-sharding.yaml  表分片配置
+      - './conf:/opt/shardingsphere-proxy/conf'
+      - './ext-lib:/opt/shardingsphere-proxy/ext-lib'
