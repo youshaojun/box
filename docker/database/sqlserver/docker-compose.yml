@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  sqlserver-db:
+    container_name: sqlserver-db
+    image: mcr.microsoft.com/mssql/server
+    #端口映射
+    ports:
+      - 1433:1433
+    #挂载
+   # volumes:
+   #  - ./data:/var/opt/mssql/data
+    #环境变量
+    environment:
+      - ACCEPT_EULA=Y
+      #SA用户密码长度必须至少为 8 个字符，并包含以下四组中的三组字符：大写字母、小写字母、10 位基数和符号
+      - SA_PASSWORD=Sap123456789

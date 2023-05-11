@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  oracle_11g:
+    image: registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g
+    container_name: oracle_11g
+    environment:
+      - TZ=Asia/Shanghai
+ #   volumes:
+ #     - /etc/localtime:/etc/localtime:ro
+ #     - ./data/oracle:/data/oracle
+ #     - ./data/profile:/etc/profile
+    ports:
+      - 1521:1521
+    privileged: true
+    command: /bin/bash -c "ln -s $ORACLE_HOME/bin/sqlplus /usr/bin"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 500M

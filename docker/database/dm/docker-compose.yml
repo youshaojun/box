@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  dm8:
+    image: xzxiaoshan/dm8:v201106
+    container_name: dm8
+    environment:
+      # 时区上海
+      TZ: Asia/Shanghai
+      LD_LIBRARY_PATH: "/opt/dmdbms/bin"
+      # SYSDBA_PWD: "SYSDBA001" # 默认密码就是SYSDBA001 这里修改默认密码不一定会起效，需要进数据库改
+    ports:
+      - "5236:5236"
+    # volumes:
+     # - ./data/dm8/data:/opt/dmdbms/data
+    # restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+        reservations:
+          # cpus: 0.8
+          memory: 1000M
