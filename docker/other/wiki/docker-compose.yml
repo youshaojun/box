@@ -1,42 +1,33 @@
 version: '3.3'
 services:
-  web:
+  xwiki-web:
     image: "xwiki:lts-postgres-tomcat"
+    container_name: xwiki-postgres-tomcat-web
+    depends_on:
+      - xwiki-db
     ports:
-      - "8888:8080"
+      - "8080:8080"
+    # Default values defined in .env file.
+    # The DB_USER/DB_PASSWORD/DB_DATABASE/DB_HOST variables are used in the hibernate.cfg.xml file.
     environment:
-      - DB_USER_FILE=/run/secrets/xwiki-db-username
-      - DB_PASSWORD_FILE=/run/secrets/xwiki-db-password
+      - XWIKI_VERSION=xwiki
+      - DB_USER=xwiki
+      - DB_PASSWORD=xwiki
       - DB_DATABASE=xwiki
-      - DB_HOST=db
+      - DB_HOST=xwiki-postgres-db
     volumes:
       - xwiki-data:/usr/local/xwiki
-    secrets:
-      - xwiki-db-username
-      - xwiki-db-password
-  db:
+  xwiki-db:
     image: "postgres:13"
+    container_name: xwiki-postgres-db
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_ROOT_PASSWORD_FILE=/run/secrets/xwiki-db-root-password
-      - POSTGRES_USER_FILE=/run/secrets/xwiki-db-username
-      - POSTGRES_PASSWORD_FILE=/run/secrets/xwiki-db-password
+      - POSTGRES_ROOT_PASSWORD=xwiki
+      - POSTGRES_PASSWORD=xwiki
+      - POSTGRES_USER=xwiki
       - POSTGRES_DB=xwiki
-    secrets:
-      - xwiki-db-username
-      - xwiki-db-password
-      - xwiki-db-root-password
+      - POSTGRES_INITDB_ARGS="--encoding=UTF8"
 volumes:
   postgres-data:
   xwiki-data:
-secrets:
-  xwiki-db-username:
-    external:
-      name: xwiki-db-username
-  xwiki-db-password:
-    external:
-      name: xwiki-db-password
-  xwiki-db-root-password:
-    external:
-      name: xwiki-db-root-password
