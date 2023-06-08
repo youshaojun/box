@@ -11,6 +11,8 @@ services:
 #      - host.docker.internal:host-gateway
     depends_on:
       - confluence_db
+    volumes:
+      - './backups:/var/atlassian/application-data/confluence/backups'
   confluence_db:
     image: 'mysql:latest'
     container_name: confluence_db
