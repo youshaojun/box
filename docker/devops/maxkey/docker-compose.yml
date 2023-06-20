@@ -12,11 +12,11 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=maxkey
     ports:
-      - "3306:3306"
+      - "3309:3306"
     restart: always
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks:
-      - maxkey
+      - maxkey.top
 
   maxkey-frontend:
     image: maxkeytop/maxkey-frontend:latest
@@ -26,13 +26,11 @@ services:
     ports:
       - "8527:8527"
     networks:
-      - maxkey
+      - maxkey.top
 
   maxkey:
     image: maxkeytop/maxkey:latest
     container_name: maxkey
-    depends_on:
-      - maxkey-mysql
     environment:
       - DATABASE_HOST=maxkey-mysql
       - DATABASE_PORT=3306
@@ -42,13 +40,11 @@ services:
     ports:
       - "9527:9527"
     networks:
-      - maxkey
+      - maxkey.top
 
   maxkey-mgt:
     image: maxkeytop/maxkey-mgt:latest
     container_name: maxkey-mgt
-    depends_on:
-      - maxkey-mysql
     environment:
       - DATABASE_HOST=maxkey-mysql
       - DATABASE_PORT=3306
@@ -58,7 +54,7 @@ services:
     ports:
       - "9526:9526"
     networks:
-      - maxkey
+      - maxkey.top
 
   maxkey-mgt-frontend:
     image: maxkeytop/maxkey-mgt-frontend:latest
@@ -69,18 +65,19 @@ services:
     ports:
       - "8526:8526"
     networks:
-      - maxkey
+      - maxkey.top
 
   maxkey-nginx:
     image: nginx:latest
     container_name: maxkey-nginx
+    hostname: maxkey-nginx
     volumes:
       - ./docker-nginx:/etc/nginx/conf.d
     ports:
-      - "80:80"
+      - "99:80"
     networks:
-      - maxkey
+      - maxkey.top
 
 networks:
-  maxkey:
-    name: maxkey
+  maxkey.top:
+    name: maxkey.top
