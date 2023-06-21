@@ -1,9 +1,14 @@
 version: '3.3'
 
+networks:
+  maxkey.top:
+    driver: bridge
+
 services:
   maxkey-mysql:
     image: mysql:8.0.32
     container_name: maxkey-mysql
+    hostname: maxkey-mysql
     volumes:
       - ./docker-mysql/data:/var/lib/mysql
       - ./docker-mysql/logs:/var/log/mysql
@@ -12,7 +17,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=maxkey
     ports:
-      - "3309:3306"
+      - "3306:3306"
     restart: always
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks:
@@ -21,6 +26,7 @@ services:
   maxkey-frontend:
     image: maxkeytop/maxkey-frontend:latest
     container_name: maxkey-frontend
+    hostname: maxkey-frontend
     environment:
       - TZ=Asia/Shanghai
     ports:
@@ -31,6 +37,7 @@ services:
   maxkey:
     image: maxkeytop/maxkey:latest
     container_name: maxkey
+    hostname: maxkey
     environment:
       - DATABASE_HOST=maxkey-mysql
       - DATABASE_PORT=3306
@@ -45,6 +52,7 @@ services:
   maxkey-mgt:
     image: maxkeytop/maxkey-mgt:latest
     container_name: maxkey-mgt
+    hostname: maxkey-mgt
     environment:
       - DATABASE_HOST=maxkey-mysql
       - DATABASE_PORT=3306
@@ -74,10 +82,6 @@ services:
     volumes:
       - ./docker-nginx:/etc/nginx/conf.d
     ports:
-      - "99:80"
+      - "80:80"
     networks:
       - maxkey.top
-
-networks:
-  maxkey.top:
-    name: maxkey.top
