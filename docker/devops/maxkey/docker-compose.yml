@@ -25,6 +25,8 @@ services:
       - TZ=Asia/Shanghai
     ports:
       - "8527:8527"
+    volumes:
+      - ./maxkey-frontend:/usr/share/nginx/html
     networks:
       - maxkey.top
 
@@ -39,6 +41,8 @@ services:
       - DATABASE_PWD=maxkey
     ports:
       - "9527:9527"
+    volumes:
+      - ./maxkey-app:/app
     networks:
       - maxkey.top
 
@@ -53,6 +57,8 @@ services:
       - DATABASE_PWD=maxkey
     ports:
       - "9526:9526"
+    volumes:
+      - ./maxkey-mgt-app:/app
     networks:
       - maxkey.top
 
@@ -64,6 +70,8 @@ services:
       - TZ=Asia/Shanghai
     ports:
       - "8526:8526"
+    volumes:
+      - ./maxkey-mgt-frontend:/usr/share/nginx/html
     networks:
       - maxkey.top
 
@@ -74,7 +82,7 @@ services:
     volumes:
       - ./docker-nginx:/etc/nginx/conf.d
     ports:
-      - "80:80"
+      - "99:80"
     networks:
       - maxkey.top
 
