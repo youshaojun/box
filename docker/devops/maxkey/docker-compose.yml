@@ -5,7 +5,7 @@ services:
     image: mysql:8.0.32
     container_name: maxkey-mysql
     volumes:
-      - ./docker-mysql/data:/var/lib/mysql
+      #- ./docker-mysql/data:/var/lib/mysql
       - ./docker-mysql/logs:/var/log/mysql
       - ./docker-mysql/conf.d:/etc/mysql/conf.d
       - ./docker-mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
