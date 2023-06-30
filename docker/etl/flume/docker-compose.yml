@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  datax_web:
+    image: linshellfeng/datax_web:3.0.1
+    ports:
+      - "9527:9527"
+    restart: unless-stopped
+#    volumes:
+#      - "./config/bootstrap.properties:/home/datax/datax-web-2.1.2/modules/datax-admin/conf/bootstrap.properties"
+#      - "./config/core.json:/home/datax/datax/conf/core.json"
