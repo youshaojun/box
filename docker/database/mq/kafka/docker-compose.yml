@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "9092:9092"
+    environment:
+      # 广播主机名称，一般用IP指定
+      KAFKA_ADVERTISED_HOST_NAME: ${HOST}
+      # Zookeeper连接地址，格式：zoo1：port1,zoo2:port2:/path
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      # Kafka启动所使用的的协议及端口
+      KAFKA_ADVERTISED_PORT: 9092
+      # 日志文件保存120个小时
+      KAFKA_LOG_RETENTION_HOURS: 120
+      # broker的topic分区leader接受数据的时候，允许的单条消息的最大值，默认为1M
+      KAFKA_MESSAGE_MAX_BYTES: 10000000
+      # broker端的leader分区在想其他follower分区复制消息时候 ，允许的单条消息的最大值
+      KAFKA_REPLICA_FETCH_MAX_BYTES: 10000000
+      KAFKA_GROUP_MAX_SESSION_TIMEOUT_MS: 60000
+      # topic的分区数
+      KAFKA_NUM_PARTITIONS: 3
+      KAFKA_DELETE_RETENTION_MS: 1000
+      # Kafka广播地址及端口，告诉客户端，使用什么地址和端口能连接到Kafka，不指定，宿主机以外的客户端将无法连接到Kafka
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${HOST}:9092
+      KAFKA_BROKER_ID: 1
+  kafka-manager:
+    image: sheepkiller/kafka-manager
+    container_name: kafka-manager
+    environment:
+      ZK_HOSTS: ${HOST}
+    ports:
+      - "9009:9000"
