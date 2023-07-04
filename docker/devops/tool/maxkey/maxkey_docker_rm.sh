@@ -1,6 +1,6 @@
 echo "rm MaxKey ... "
 
-./maxkey_docker_stop.sh
+maxkey_docker_stop.sh
 
 #maxkey-nginx proxy
 docker rm maxkey-nginx
