@@ -176,3 +176,8 @@ Caused by: org.apache.seatunnel.server.common.SeatunnelException: Http request f
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
 	... 64 common frames omitted
+2023-07-18 09:06:40.208 seatunnel DESKTOP-7PJC4E4 INFO [main] [JettyServletWebServerFactory.getWebServer():166] - Server initialized with port: 8801
+2023-07-18 09:06:40.239 seatunnel DESKTOP-7PJC4E4 INFO [main] [ServletWebServerApplicationContext.prepareWebApplicationContext():290] - Root WebApplicationContext: initialization completed in 2771 ms
+2023-07-18 09:06:46.466 seatunnel DESKTOP-7PJC4E4 INFO [main] [FrameworkServlet.initServletBean():525] - Initializing Servlet 'dispatcherServlet'
+2023-07-18 09:06:46.466 seatunnel DESKTOP-7PJC4E4 INFO [main] [FrameworkServlet.initServletBean():547] - Completed initialization in 0 ms
+2023-07-18 09:06:46.482 seatunnel DESKTOP-7PJC4E4 INFO [main] [JettyWebServer.start():172] - Jetty started on port(s) 8801 (http/1.1) with context path '/'
