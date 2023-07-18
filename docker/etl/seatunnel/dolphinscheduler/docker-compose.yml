@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+# https://dolphinscheduler.apache.org/zh-cn/docs/3.1.7/guide/start/docker
+
 version: "3.8"
 
 services:
@@ -120,6 +123,7 @@ services:
     volumes:
       - dolphinscheduler-logs:/opt/dolphinscheduler/logs
       - dolphinscheduler-shared-local:/opt/soft
+      - ./conf/master:/opt/dolphinscheduler/conf
     networks:
       - dolphinscheduler
 
@@ -140,6 +144,7 @@ services:
       - dolphinscheduler-logs:/opt/dolphinscheduler/logs
       - dolphinscheduler-shared-local:/opt/soft
       - dolphinscheduler-resource-local:/dolphinscheduler
+      - ./conf/worker:/opt/dolphinscheduler/conf
     networks:
       - dolphinscheduler
 

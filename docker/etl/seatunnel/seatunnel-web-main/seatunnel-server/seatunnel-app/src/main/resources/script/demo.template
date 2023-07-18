@@ -1,0 +1,45 @@
+# Defining the runtime environment
+env {
+  # You can set flink configuration here
+  execution.parallelism = 1
+  job.mode = "BATCH"
+}
+source{
+    Jdbc {
+        url = "jdbc:mysql://localhost:3306/datax?serverTimezone=GMT%2b8"
+        driver = "com.mysql.cj.jdbc.Driver"
+        connection_check_timeout_sec = 100
+        user = "root"
+        password = "Ysj666666"
+        query = "select * from test limit 100"
+    }
+}
+
+transform {
+  FieldMapper {
+    source_table_name = "test"
+    result_table_name = "test01"
+    field_mapper = {
+        id = id
+        db_type = db_type
+        create_time = create_time
+        status = status
+        remark = remark
+        ext01 = ext02
+    }
+  }
+}
+
+sink {
+    Jdbc {
+        url = "jdbc:mysql://localhost:3306/datax"
+        driver = "com.mysql.cj.jdbc.Driver"
+        user = "root"
+        password = "Ysj666666"
+        generate_sink_sql = true
+        # You need to configure both database and table
+        # database = datax
+        table = test01
+        primary_keys = ["id"]
+    }
+}
