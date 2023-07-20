@@ -5,11 +5,13 @@ services:
   blueocean:
     image: jenkinsci/blueocean
     container_name: jenkins
+    user: root
     ports:
-      - '9095:8080'
-      - '50000:50000'
+      - '12908:8080'
+      #- '50000:50000'
     volumes:
       - './jenkins_home:/var/jenkins_home'
-      - './apache-maven-3.5.4:/usr/local/maven'
+      - './apache-maven-3.5.3:/usr/local/maven'
+      #- '/usr/local/git:/var/local/git'
       - '/etc/localtime:/etc/localtime'
       - '/var/run/docker.sock:/var/run/docker.sock'
