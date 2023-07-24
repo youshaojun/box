@@ -4,7 +4,7 @@ services:
   spark-iceberg:
     image: tabulario/spark-iceberg
     container_name: spark-iceberg
-    build: spark/
+    #build: spark/
     networks:
       iceberg_net:
     depends_on:
@@ -15,7 +15,7 @@ services:
       - ./notebooks:/home/iceberg/notebooks/notebooks
     environment:
       - AWS_ACCESS_KEY_ID=admin
-      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_SECRET_ACCESS_KEY=admin
       - AWS_REGION=us-east-1
     ports:
       - 8888:8888
@@ -31,7 +31,7 @@ services:
       - 8181:8181
     environment:
       - AWS_ACCESS_KEY_ID=admin
-      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_SECRET_ACCESS_KEY=admin
       - AWS_REGION=us-east-1
       - CATALOG_WAREHOUSE=s3://warehouse/
       - CATALOG_IO__IMPL=org.apache.iceberg.aws.s3.S3FileIO
@@ -41,7 +41,7 @@ services:
     container_name: minio
     environment:
       - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=password
+      - MINIO_ROOT_PASSWORD=admin
       - MINIO_DOMAIN=minio
     networks:
       iceberg_net:
@@ -60,7 +60,7 @@ services:
       iceberg_net:
     environment:
       - AWS_ACCESS_KEY_ID=admin
-      - AWS_SECRET_ACCESS_KEY=password
+      - AWS_SECRET_ACCESS_KEY=admin
       - AWS_REGION=us-east-1
     entrypoint: >
       /bin/sh -c "
