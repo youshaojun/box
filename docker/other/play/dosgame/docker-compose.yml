@@ -1,4 +1,5 @@
 version: '3.3'
+# 参考 https://blog.laoda.de/archives/docker-compose-install-chinese-dos-games/
 services:
   dosgame-web-docker:
     container_name: dosgame
