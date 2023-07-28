@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  dosgame-web-docker:
+    container_name: dosgame
+    image: 'oldiy/dosgame-web-docker:latest'
+    ports:
+      - '8080:262'
+    volumes:
+      # 注意磁盘空间, 需要占用36G
+      #- '/root/data/docker_data/games/chinese-dos-games:/app/static/games'
