@@ -6,6 +6,7 @@ services:
       - 'mysql-conf:/etc/mysql/conf.d'
       - 'mysql-logs:/logs'
       - 'mysql-data:/var/lib/mysql'
+      - './docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
 #      - './conf:/etc/mysql/conf.d'
 #      - './logs:/logs'
 #      - './data:/var/lib/mysql'
