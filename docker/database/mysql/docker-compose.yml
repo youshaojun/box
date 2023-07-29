@@ -3,9 +3,9 @@ services:
   mysql:
     container_name: mysql
     volumes:
-      - 'mysql-conf:/etc/mysql/conf.d'
+      #- 'mysql-conf:/etc/mysql/conf.d'
       - 'mysql-logs:/logs'
-      - 'mysql-data:/var/lib/mysql'
+     # - 'mysql-data:/var/lib/mysql'
       - './docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
 #      - './conf:/etc/mysql/conf.d'
 #      - './logs:/logs'
