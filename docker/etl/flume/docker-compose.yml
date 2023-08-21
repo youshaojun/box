@@ -1,10 +1,14 @@
 version: '3.3'
+
 services:
-  datax_web:
-    image: linshellfeng/datax_web:3.0.1
+  flume:
+    build:
+      context: ./flume
+    image: flume:1.9.0
+    restart: always
+    #    volumes:
+    #      - "./flume/flume.conf:/etc/flume/flume.conf"
+    #      - "./keytool/pki/jks/truststore.jks:/etc/jks/truststore.jks"
+    #      - "./kafka/jaas/kafka_client_jaas.conf:/root/.java.login.config"
     ports:
-      - "9527:9527"
-    restart: unless-stopped
-#    volumes:
-#      - "./config/bootstrap.properties:/home/datax/datax-web-2.1.2/modules/datax-admin/conf/bootstrap.properties"
-#      - "./config/core.json:/home/datax/datax/conf/core.json"
+      - "24001:24001"
