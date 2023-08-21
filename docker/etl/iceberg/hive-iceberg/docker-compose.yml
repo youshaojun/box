@@ -7,3 +7,5 @@ services:
     ports:
       - 10000:10000
       - 10002:10002
+    environment:
+      - SERVICE_NAME=${SERVICE_NAME}
