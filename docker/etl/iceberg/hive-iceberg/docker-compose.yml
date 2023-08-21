@@ -1,0 +1,9 @@
+version: '3.3'
+
+services:
+  spark-iceberg:
+    image: apache/hive:${HIVE_VERSION}
+    container_name: hive
+    ports:
+      - 10000:10000
+      - 10002:10002
