@@ -11,11 +11,13 @@ services:
       - SERVICE_NAME=${SERVICE_NAME}
       - SERVICE_OPTS="-Dhive.metastore.uris=thrift://metastore:9083"
       - IS_RESUME="true"
+    depends_on:
+      - metastore
   metastore:
     image: apache/hive:${HIVE_VERSION}
     container_name: metastore
     ports:
       - 9083:9083
-    environment:
-      - DB_DRIVER=mysql
-      - SERVICE_OPTS="-Djavax.jdo.option.ConnectionDriverName=com.mysql.cj.jdbc.Driver -Djavax.jdo.option.ConnectionURL=jdbc:mysql://120.48.79.88:3306/hive1?createDatabaseIfNotExist=true -Djavax.jdo.option.ConnectionUserName=ambari -Djavax.jdo.option.ConnectionPassword=bigdata"
+    #environment:
+     # - DB_DRIVER=mysql
+     # - SERVICE_OPTS="-Djavax.jdo.option.ConnectionDriverName=com.mysql.cj.jdbc.Driver -Djavax.jdo.option.ConnectionURL=jdbc:mysql://120.48.79.88:3306/hive1?createDatabaseIfNotExist=true -Djavax.jdo.option.ConnectionUserName=ambari -Djavax.jdo.option.ConnectionPassword=bigdata"
