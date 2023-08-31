@@ -2,6 +2,7 @@ version: '3.3'
 services:
   mysql:
     container_name: mysql
+    restart: always
     volumes:
       #- 'mysql-conf:/etc/mysql/conf.d'
       - 'mysql-logs:/logs'
