@@ -4,16 +4,33 @@ version: '3.3'
 # 账号密码: admin/admin
 services:
   sonarqube:
-    image: sonarqube:9.1.0-community
+    # java11
+    #image: sonarqube:9.1.0-community
+    image: sonarqube:7.8-community
     container_name: sonarqube
     restart: always
     ports:
       - '11003:9000'
+    depends_on:
+      - sonarqube-postgres
     volumes:
       - './data:/opt/sonarqube/data'
       - './logs:/opt/sonarqube/logs'
       - './extensions:/opt/sonarqube/extensions'
     environment:
-      - SONARQUBE_JDBC_USERNAME=root
-      - SONARQUBE_JDBC_PASSWORD=root
-      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgresql/sonarqube
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=sonar
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://sonarqube-postgres:5432/sonarqube
+  sonarqube-postgres:
+    image: postgres:9.6.23
+    container_name: sonarqube-postgres
+    restart: always
+    ports:
+      - "11004:5432"
+    environment:
+      - TZ=Asia/Shanghai
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_DB=sonarqube
+    volumes:
+      - './pgdata:/var/lib/postgresql/data'
