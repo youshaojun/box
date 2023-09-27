@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   confluence:
-    image: 'haxqer/confluence:7.19.10'
+    image: 'haxqer/confluence:7.19.9'
     container_name: confluence
     ports:
       - '8090:8090'
@@ -19,7 +19,7 @@ services:
     ports:
       - '3307:3306'
     volumes:
-      # - './mysql/conf.d:/etc/mysql/conf.d'
+      - './mysql/conf.d:/etc/mysql/conf.d'
       - './mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d'
     environment:
       - 'MYSQL_ROOT_PASSWORD=Admin666666'

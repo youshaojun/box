@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS `confluencedb` DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_bin;
+
+
+
+ 

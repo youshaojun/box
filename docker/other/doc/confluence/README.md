@@ -49,7 +49,7 @@
 - 然后配置你的数据库:
 ```
 
-jdbc:mysql://confluence_db/confluencedb?sessionVariables=transaction_isolation='READ-COMMITTED'
+jdbc:mysql://confluence_db/confluencedb?sessionVariables=transaction_isolation='READ-COMMITTED'&useUnicode=true&characterEncoding=utf-8
 
 ```
 
