@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  # http://www.dlink.top/docs/next/deploy_guide/docker_deploy
+  # admin/admin
+  dinky:
+    image: dinkydocker/dinky-standalone-server:0.7.2-flink14
+    container_name: dinky
+    restart: always
+    ports:
+      - '12501:8888'
+      - '12502:8081'
+    environment:
+      - 'MYSQL_ADDR=dinky-mysql:3306'
+    depends_on:
+      - dinky-mysql
+
+  dinky-mysql:
+    image: dinkydocker/dinky-mysql-server:0.7.2
+    container_name: dinky-mysql
+    restart: always
+    volumes:
+      - './data:/var/lib/mysql'
+
