@@ -1,15 +1,24 @@
 version: '3.3'
+
 services:
   redis:
     image: redis:latest
-    restart: unless-stopped
+    restart: always
+    environment:
+      - 'TZ=Asia/Shanghai'
     ports:
       - '6379:6379'
     container_name: redis
+    privileged: true
+#    volumes:
+#      - './conf:/etc/redis'
+#      - './data:/data'
+#    command:
+#      # - /bin/bash
+#      # - -c
+#      - --requirepass "Ysj666666"
     volumes:
-      - './conf:/etc/redis'
-      - './data:/data'
-    command:
-      # - /bin/bash
-      # - -c
-      - --requirepass "Ysj666666"
+      - ./data:/data
+      - ./conf/redis.conf:/etc/redis/redis.conf
+    command: "redis-server /etc/redis/redis.conf --appendonly yes"
+
