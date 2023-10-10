@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  nacos:
+    image: nacos/nacos-server:2.0.1
+    hostname: "nacos-standalone"
+    environment:
+      - MODE=standalone
+      - TZ=Asia/Shanghai
+    volumes:
+      - './init.d/custom.properties:/home/nacos/init.d/custom.properties'
+    ports:
+      - '8848:8848'
+      - '9848:9848'
+      - '9849:9849'
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2g"
