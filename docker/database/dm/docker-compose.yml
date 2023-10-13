@@ -1,7 +1,13 @@
 version: '3.3'
 services:
+  # wget -O dm8_docker.tar -c https://download.dameng.com/eco/dm8/dm8_20220822_rev166351_x86_rh6_64_ctm.tar
+  # docker load -i dm8_docker.tar
+  # 登录
+  # docker exec -it dm8 bash
+  # cd /opt/dmdbms/bin
+  # ./disql SYSDBA/SYSDBA001
   dm8:
-    image: xzxiaoshan/dm8:v201106
+    image: dm8_single:v8.1.2.128_ent_x86_64_ctm_pack4
     container_name: dm8
     environment:
       # 时区上海
@@ -10,9 +16,9 @@ services:
       # SYSDBA_PWD: "SYSDBA001" # 默认密码就是SYSDBA001 这里修改默认密码不一定会起效，需要进数据库改
     ports:
       - "5236:5236"
-    # volumes:
-     # - ./data/dm8/data:/opt/dmdbms/data
-    # restart: always
+    volumes:
+      - ./data/dm8/data:/opt/dmdbms/data
+    restart: always
     deploy:
       resources:
         limits:
