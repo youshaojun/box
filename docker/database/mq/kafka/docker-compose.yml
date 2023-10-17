@@ -12,7 +12,7 @@ services:
   # 生产者发送消息
   # bin/kafka-console-producer.sh --broker-list kafka:9092 --topic partopic
   # 消费者消费消息
-  # bin/kafka-console-consumer.sh --bootstrap-server 192.kafka:9092 --topic partopic --from-beginning
+  # bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic partopic --from-beginning
   kafka:
     image: wurstmeister/kafka
     container_name: kafka
