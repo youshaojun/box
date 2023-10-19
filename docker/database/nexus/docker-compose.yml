@@ -5,13 +5,10 @@ services:
   nexus:
     image: 'sonatype/nexus3'
     container_name: nexus
-    restart: unless-stopped
+    restart: always
     environment:
       - TZ=Asia/Shanghai
     ports:
       - '8931:8081'
     volumes:
-      - 'nexus-data:/nexus-data'
-
-volumes:
-  nexus-data:
+      - './data:/nexus-data'
