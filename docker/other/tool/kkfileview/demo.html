@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/Base64/1.2.0/base64.js"></script>
+</head>
+<body>
+
+</body>
+
+<script>
+    // 要预览文件的访问地址
+    var url = 'http://localhost:18081/20231011/xxx.xlsx';
+
+    window.open('http://localhost:12998/onlinePreview?url=' + encodeURIComponent(btoa(url)));
+
+</script>
+</html>
