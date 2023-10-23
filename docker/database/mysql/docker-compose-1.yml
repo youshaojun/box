@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  mysql:
+    container_name: mysql
+    restart: always
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=Ysj666666'
+    ports:
+      - '3306:3306'
+    image: 'mysql:latest'
