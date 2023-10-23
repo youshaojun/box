@@ -1,0 +1,10 @@
+version: '3.3'
+
+# 文件预览服务
+services:
+  minio:
+    image: keking/kkfileview:4.1.0
+    ports:
+      - '12998:8012'
+    container_name: kkfileview
+    restart: always
