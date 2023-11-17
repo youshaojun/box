@@ -1,0 +1,38 @@
+services:
+  # https://confluence.atlassian.com/security/cve-2023-22518-improper-authorization-vulnerability-in-confluence-data-center-and-server-1311473907.html
+  # confluence漏洞被黑客利用导致备份数据被加密(.LOCK3D), 截止2023年11月17日09:28:22暂时无法解密
+  # 处理意见: 升级至8.6.1版本, 备份文件需转移, 定期将备份文件传输到其他服务器备份, 并定期测试备份文件是否能够进行还原
+  confluence:
+    image: haxqer/confluence:8.6.1
+    container_name: confluence-srv
+    restart: always
+    ports:
+      - "8090:8090"
+    environment:
+      - TZ=Asia/Shanghai
+    #      - JVM_MINIMUM_MEMORY=1g
+    #      - JVM_MAXIMUM_MEMORY=12g
+    #      - JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=1g -XX:ReservedCodeCacheSize=8g'
+    depends_on:
+      - mysql
+    volumes:
+      - "./confluence-data:/var/confluence"
+
+  mysql:
+    image: mysql:5.7.38
+    container_name: mysql-confluence
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_DATABASE=confluence
+      - MYSQL_ROOT_PASSWORD=Ysj666666
+      - MYSQL_USER=confluence
+      - MYSQL_PASSWORD=Ysj666666
+    volumes:
+      - "./mysql-data:/var/lib/mysql"
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--transaction-isolation=READ-COMMITTED', '--innodb_log_file_size=256M', '--max_allowed_packet=256M','--log_bin_trust_function_creators=1']
+
+
+
