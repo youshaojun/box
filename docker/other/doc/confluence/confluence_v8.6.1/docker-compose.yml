@@ -19,7 +19,7 @@ services:
       - "./confluence-data:/var/confluence"
 
   mysql:
-    image: mysql:5.7.38
+    image: mysql:8.0
     container_name: mysql-confluence
     restart: always
     ports:
