@@ -17,6 +17,7 @@ services:
       - mysql
     volumes:
       - "./confluence-data:/var/confluence"
+      - "./confluence-backups:/var/atlassian/application-data/confluence/backups"
 
   mysql:
     image: mysql:8.0
