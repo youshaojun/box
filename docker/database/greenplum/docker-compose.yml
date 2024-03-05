@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  greenplum:
+    # http://dbal.cloudns.nz:8000/k/#s/9JidnH-g&view=docker%E9%83%A8%E7%BD%B2
+    # docker load -i greenplum-6.19.3.tar.gz
+    # 默认账号密码 gpadmin/greenplum
+    image: inrgihc/greenplum:6.19.3
+    container_name: greenplum
+    restart: always
+    ports:
+      - "5432:5432"
