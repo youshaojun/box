@@ -22,7 +22,9 @@ services:
     volumes:
       - nacos-logs:/home/nacos/logs
       - nacos-conf:/home/nacos/conf
+      - nacos-data:/home/nacos/data
 
 volumes:
   nacos-conf:
   nacos-logs:
+  nacos-data:
