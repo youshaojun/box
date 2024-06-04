@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:22.8.8-alpine
+    container_name: clickhouse
+    # ports:
+    # - "9000:9000"
+    # - "8123:8123"
+    tty: true
+    volumes:
+      - ./conf/clickhouse-config.xml:/etc/clickhouse-server/config.xml
+      - ./conf/clickhouse-users.xml:/etc/clickhouse-server/users.xml
+      # - ./conf/clickhouse-storage.xml:/etc/clickhouse-server/config.d/storage.xml
+      #- ./data/clickhouse/:/var/lib/clickhouse/
+    restart: on-failure
+    logging:
+      options:
+        max-size: 50m
+        max-file: "3"
