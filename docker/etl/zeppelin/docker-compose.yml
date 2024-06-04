@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  zeppelin:
+    image: apache/zeppelin:latest
+    container_name: zeppelin
+    ports:
+      - 8080:8080
+
