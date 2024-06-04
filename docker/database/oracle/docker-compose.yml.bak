@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  oracle:
+    image: docker.io/jaspeen/oracle-xe-11g
+    container_name: oracle11g-1
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+      - ORACLE_HOME=/home/oracle/app/oracle/product/11.2.0/dbhome_2
+    volumes:
+      - ./data:/u01/app/oracle
+    ports:
+      - 1521:1521
+    restart: always
