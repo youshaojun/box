@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  trino:
+    image: trinodb/trino
+    container_name: trino
+    restart: always
+    ports:
+      - 8080:8080
+
+
