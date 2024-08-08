@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  kingbase:
+    # 官方下载地址
+    # https://kingbase.oss-cn-beijing.aliyuncs.com/KESV8R3/05.Docker%E7%89%88%E6%9C%AC/kdb_x86_64_V008R006C008B0020.tar
+    # 通过百度网盘分享的文件：数据库
+    # 链接：https://pan.baidu.com/s/1cjmF4aOUuqhg4kGo6eowLw
+    # 提取码：mcrf
+    image: kingbase:v1
+    container_name: kingbase
+    privileged: true
+    ports:
+      - "54321:54321"
+    environment:
+      - ENABLE_CI=yes
+      - NEED_START=yes
+      - DB_USER=kingbase
+      - DB_PASSWORD=Ysj666666
+    volumes:
+      - ./data:/var/lib/kingbase
+    restart: always
