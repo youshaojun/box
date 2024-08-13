@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  cassandra:
+    image: cassandra
+    container_name: cassandra
+    restart: always
+    ports:
+      - 7000:7000
+      - 9042:9042
+    volumes:
+    #- ./cassandra.conf:/etc/cassandra/cassandra.yaml
+    #- ./cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=Ysj666666
