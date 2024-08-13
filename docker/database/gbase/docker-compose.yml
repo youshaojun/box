@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  gbase:
+    image: "liaosnet/gbase8s"
+    container_name: "gbase"
+    ports:
+      - 9088:9088
+    #  - 9200:9200
+    #  - 9300:9300
