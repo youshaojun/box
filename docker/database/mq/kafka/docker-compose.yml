@@ -5,6 +5,22 @@ services:
     container_name: zookeeper
     ports:
       - "2181:2181"
+    deploy:
+      resources:
+        limits:
+          #使用的容器的CPU核心数量或百分比
+          cpus: '0.1'
+          #可以使用的具体CPU核心1~3
+          #cpuset: '0-3'
+          #内存上限为1G
+          memory: 2G
+          #内存+swap内存总上限为2G
+          #memswap_limit: 4G
+        #reservations:
+          #内存预留为256M
+         # memory: 512M
+          # 保留的CPU使用量为10%
+          #cpus: "0.1"
   # docker exec -it kafka /bin/sh
   # cd opt/kafka_2.13-2.8.1
   # 创建topic
@@ -20,6 +36,13 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "9092:9092"
+    deploy:
+      resources:
+        limits:
+          #使用的容器的CPU核心数量或百分比
+          cpus: '0.1'
+          #内存上限为1G
+          memory: 2G
     environment:
       # 广播主机名称，一般用IP指定
       KAFKA_ADVERTISED_HOST_NAME: ${HOST}
@@ -48,3 +71,10 @@ services:
       ZK_HOSTS: ${HOST}
     ports:
       - "9009:9000"
+    deploy:
+      resources:
+        limits:
+          #使用的容器的CPU核心数量或百分比
+          cpus: '0.1'
+          #内存上限为1G
+          memory: 2G
