@@ -1,0 +1,46 @@
+version: '2.3'
+
+services:
+  standalone:
+    image: apachepulsar/pulsar
+    restart: always
+    environment:
+      - BOOKIE_MEM=" -Xms512m -Xmx512m -XX:MaxDirectMemorySize=1g"
+    volumes:
+      - pulsardata:/pulsar/data:rw
+      - pulsarconf:/pulsar/conf:rw
+    ports:
+      - 8080:8080
+      - 6650:6650
+    command: >
+      /bin/bash -c
+      "bin/apply-config-from-env.py conf/standalone.conf
+      && exec bin/pulsar standalone --advertised-address standalone"
+
+  dashboard:
+    image: apachepulsar/pulsar-dashboard
+    depends_on:
+      - standalone
+    ports:
+      - "81:80"
+    environment:
+      - SERVICE_URL=http://standalone:8080
+
+  pulsar-manager:
+    image: "apachepulsar/pulsar-manager:v0.2.0"
+    restart: always
+    ports:
+      - "9527:9527"
+      - "7750:7750"
+    depends_on:
+      - standalone
+    links:
+      - standalone
+    environment:
+      - SPRING_CONFIGURATION_FILE=/pulsar-manager/pulsar-manager/application.properties
+
+volumes:
+  pulsardata:
+    driver: local
+  pulsarconf:
+    driver: local
