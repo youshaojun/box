@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  greenplum_gpcc:
+    image: lhrbest/greenplum_gpcc:6.23.1
+    container_name: gpdb6
+    stdin_open: true
+    tty: true
+    hostname: gpdb6
+    ports:
+      - 15432:5432
+      - 28088:28080
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+    privileged: true
+    command: /usr/sbin/init
