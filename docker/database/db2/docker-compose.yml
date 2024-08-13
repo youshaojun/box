@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  db2:
+    image: ibmcom/db2
+    container_name: db2
+    restart: always
+    privileged: true
+    environment:
+      - DB2INST1_PASSWORD=Ysj666666
+      - DBNAME=test
+      - LICENSE=accept
+    ports:
+      - "50000:50000"
+#    volumes:
+#      - ./data:/database
