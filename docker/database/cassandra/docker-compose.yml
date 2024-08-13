@@ -8,9 +8,25 @@ services:
     ports:
       - 7000:7000
       - 9042:9042
-    volumes:
+    #volumes:
     #- ./cassandra.conf:/etc/cassandra/cassandra.yaml
     #- ./cassandra:/var/lib/cassandra
     environment:
       - CASSANDRA_PASSWORD_SEEDER=yes
-      - CASSANDRA_PASSWORD=Ysj666666
+      - CASSANDRA_PASSWORD=123456Abc#
+    deploy:
+      resources:
+        limits:
+          #使用的容器的CPU核心数量或百分比
+          cpus: '0.1'
+          #可以使用的具体CPU核心1~3
+          #cpuset: '0-3'
+          #内存上限为1G
+          memory: 2G
+          #内存+swap内存总上限为2G
+          #memswap_limit: 4G
+          #reservations:
+          #内存预留为256M
+          # memory: 512M
+          # 保留的CPU使用量为10%
+          #cpus: "0.1"
