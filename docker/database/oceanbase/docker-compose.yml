@@ -10,3 +10,8 @@ services:
     environment:
       - MODE=mini
       - OB_TENANT_PASSWORD=Ysj666666
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 2G
