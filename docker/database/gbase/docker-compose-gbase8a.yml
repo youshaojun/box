@@ -1,0 +1,9 @@
+version: '3.3'
+
+services:
+  gbase:
+    image: "shihd/gbase8a:1.0"
+    container_name: "gbase8a"
+    privileged: true
+    ports:
+      - 5258:5258
