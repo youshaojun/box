@@ -7,3 +7,8 @@ services:
     privileged: true
     ports:
       - 5258:5258
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 2G
