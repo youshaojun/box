@@ -4,6 +4,8 @@ services:
   standalone:
     image: apachepulsar/pulsar
     restart: always
+    user: root
+    privileged: true
     environment:
       - BOOKIE_MEM=" -Xms512m -Xmx512m -XX:MaxDirectMemorySize=1g"
     volumes:
