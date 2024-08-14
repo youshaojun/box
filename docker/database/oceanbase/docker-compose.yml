@@ -1,0 +1,12 @@
+version: '3.3'
+
+# https://www.oceanbase.com/docs/common-oceanbase-database-cn-1000000001049797
+services:
+  oceanbase-ce:
+    image: oceanbase/oceanbase-ce
+    container_name: obstandalone
+    ports:
+      - 2881:2881
+    environment:
+      - MODE=mini
+      - OB_TENANT_PASSWORD=Ysj666666
