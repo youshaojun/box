@@ -1,0 +1,56 @@
+version: '3.3'
+
+services:
+  rabbitmq1:
+    restart: always
+    image: rabbitmq:3.8.5-management
+    container_name: rabbitmq01
+    hostname: rabbitmq01
+    ports:
+      - 5673:5672
+      - 15673:15672
+    environment:
+      TZ: Asia/Shanghai
+      #自定义登录账号
+      RABBITMQ_DEFAULT_USER: admin
+      #自定义登录密码
+      RABBITMQ_DEFAULT_PASS: 123456Abc#
+    volumes:
+      - ./cluster-data/mq1:/var/lib/rabbitmq
+      - ./cluster-data/.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
+
+  rabbitmq2:
+    restart: always
+    image: rabbitmq:3.8.5-management
+    container_name: rabbitmq02
+    hostname: rabbitmq02
+    ports:
+      - 5674:5672
+      - 15674:15672
+    environment:
+      TZ: Asia/Shanghai
+      #自定义登录账号
+      RABBITMQ_DEFAULT_USER: admin
+      #自定义登录密码
+      RABBITMQ_DEFAULT_PASS: 123456Abc#
+    volumes:
+      - ./cluster-data/mq2:/var/lib/rabbitmq
+      - ./cluster-data/.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
+
+  rabbitmq3:
+    restart: always
+    image: rabbitmq:3.8.5-management
+    container_name: rabbitmq03
+    hostname: rabbitmq03
+    ports:
+      - 5675:5672
+      - 15675:15672
+    environment:
+      TZ: Asia/Shanghai
+      #自定义登录账号
+      RABBITMQ_DEFAULT_USER: admin
+      #自定义登录密码
+      RABBITMQ_DEFAULT_PASS: 123456Abc#
+    volumes:
+      - ./cluster-data/mq3:/var/lib/rabbitmq
+      - ./cluster-data/.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie

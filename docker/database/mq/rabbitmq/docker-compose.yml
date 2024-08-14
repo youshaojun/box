@@ -1,56 +1,24 @@
 version: '3.3'
 
 services:
-  rabbitmq1:
+  rabbitmq:
+    image: rabbitmq:3.12.6-management
+    container_name: rabbitmqv3.12.6
     restart: always
-    image: rabbitmq:3.8.5-management
-    container_name: rabbitmq01
-    hostname: rabbitmq01
-    ports:
-      - 5673:5672
-      - 15673:15672
+    # 节点名 rabbit@rabbitserver，不然会去容器ID
+    hostname: rabbitserver
     environment:
-      TZ: Asia/Shanghai
-      #自定义登录账号
-      RABBITMQ_DEFAULT_USER: admin
-      #自定义登录密码
-      RABBITMQ_DEFAULT_PASS: 123456Abc#
-    volumes:
-      - ./data/mq1:/var/lib/rabbitmq
-      - ./data/.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
-
-  rabbitmq2:
-    restart: always
-    image: rabbitmq:3.8.5-management
-    container_name: rabbitmq02
-    hostname: rabbitmq02
+      # 默认虚拟机名
+      RABBITMQ_DEFAULT_VHOST: admin_vhost
+      # 用户名
+      RABBITMQ_DEFAULT_USER: root
+      # 密码
+      RABBITMQ_DEFAULT_PASS: devops666
+      # 指定自定义插件目录
+      RABBITMQ_PLUGINS_DIR: '/plugins:/plugins'
     ports:
-      - 5674:5672
-      - 15674:15672
-    environment:
-      TZ: Asia/Shanghai
-      #自定义登录账号
-      RABBITMQ_DEFAULT_USER: admin
-      #自定义登录密码
-      RABBITMQ_DEFAULT_PASS: 123456Abc#
+      - "5672:5672"
+      - "15672:15672"
     volumes:
-      - ./data/mq2:/var/lib/rabbitmq
-      - ./data/.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
-
-  rabbitmq3:
-    restart: always
-    image: rabbitmq:3.8.5-management
-    container_name: rabbitmq03
-    hostname: rabbitmq03
-    ports:
-      - 5675:5672
-      - 15675:15672
-    environment:
-      TZ: Asia/Shanghai
-      #自定义登录账号
-      RABBITMQ_DEFAULT_USER: admin
-      #自定义登录密码
-      RABBITMQ_DEFAULT_PASS: 123456Abc#
-    volumes:
-      - ./data/mq3:/var/lib/rabbitmq
-      - ./data/.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie
+      - ./data:/var/lib/rabbitmq
+      - ./plugins:/plugins
