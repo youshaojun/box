@@ -83,6 +83,6 @@ services:
       resources:
         limits:
           #使用的容器的CPU核心数量或百分比
-          cpus: '0.1'
+          cpus: '0.3'
           #内存上限为1G
-          memory: 2G
+          #memory: 2G

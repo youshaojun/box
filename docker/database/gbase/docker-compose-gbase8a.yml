@@ -3,6 +3,7 @@ version: '3.3'
 services:
   gbase:
     image: "shihd/gbase8a:1.0"
+    hostname: gbase8a
     container_name: "gbase8a"
     privileged: true
     ports:
@@ -10,5 +11,5 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.2'
-          memory: 4G
+          cpus: '0.3'
+          #memory: 4G

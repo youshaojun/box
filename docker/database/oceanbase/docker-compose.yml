@@ -14,4 +14,4 @@ services:
       resources:
         limits:
           cpus: '0.2'
-          memory: 2G
+          #memory: 2G
