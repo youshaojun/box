@@ -5,7 +5,7 @@ services:
     container_name: "doris-fe-01"
     hostname: "fe-01"
     environment:
-      - FE_SERVERS=fe1:172.20.80.2:9010,fe2:172.20.80.3:9010,fe3:172.20.80.4:9010
+      - FE_SERVERS=fe1:${FE01_HOST}:9010,fe2:${FE02_HOST}:9010,fe3:${FE03_HOST}:9010
       - FE_ID=1
     #ports:
     #  - 8031:8030
@@ -15,14 +15,14 @@ services:
       - ./data/fe-01/log:/opt/apache-doris/fe/log
     networks:
       doris_net:
-        ipv4_address: 172.20.80.2
+        ipv4_address: ${FE01_HOST}
 
   docker-fe-02:
     image: "apache/doris:2.0.0_alpha-fe-x86_64"
     container_name: "doris-fe-02"
     hostname: "fe-02"
     environment:
-      - FE_SERVERS=fe1:172.20.80.2:9010,fe2:172.20.80.3:9010,fe3:172.20.80.4:9010
+      - FE_SERVERS=fe1:${FE01_HOST}:9010,fe2:${FE02_HOST}:9010,fe3:${FE03_HOST}:9010
       - FE_ID=2
     #ports:
     #  - 8032:8030
@@ -32,14 +32,14 @@ services:
       - ./data/fe-02/log:/opt/apache-doris/fe/log
     networks:
       doris_net:
-        ipv4_address: 172.20.80.3
+        ipv4_address: ${FE02_HOST}
 
   docker-fe-03:
     image: "apache/doris:2.0.0_alpha-fe-x86_64"
     container_name: "doris-fe-03"
     hostname: "fe-03"
     environment:
-      - FE_SERVERS=fe1:172.20.80.2:9010,fe2:172.20.80.3:9010,fe3:172.20.80.4:9010
+      - FE_SERVERS=fe1:${FE01_HOST}:9010,fe2:${FE02_HOST}:9010,fe3:${FE03_HOST}:9010
       - FE_ID=3
     #ports:
     #  - 8033:8030
@@ -49,7 +49,7 @@ services:
       - ./data/fe-03/log:/opt/apache-doris/fe/log
     networks:
       doris_net:
-        ipv4_address: 172.20.80.4
+        ipv4_address: ${FE03_HOST}
 
   docker-be-01:
     image: "apache/doris:2.0.0_alpha-be-x86_64"
@@ -60,8 +60,8 @@ services:
       - docker-fe-02
       - docker-fe-03
     environment:
-      - FE_SERVERS=fe1:172.20.80.2:9010,fe2:172.20.80.3:9010,fe3:172.20.80.4:9010
-      - BE_ADDR=172.20.80.5:9050
+      - FE_SERVERS=fe1:${FE01_HOST}:9010,fe2:${FE02_HOST}:9010,fe3:${FE03_HOST}:9010
+      - BE_ADDR=${BE01_HOST}:9050
     #ports:
     #  - 8041:8040
     volumes:
@@ -70,7 +70,7 @@ services:
       - ./data/be-01/log:/opt/apache-doris/be/log
     networks:
       doris_net:
-        ipv4_address: 172.20.80.5
+        ipv4_address: ${BE01_HOST}
 
   docker-be-02:
     image: "apache/doris:2.0.0_alpha-be-x86_64"
@@ -81,8 +81,8 @@ services:
       - docker-fe-02
       - docker-fe-03
     environment:
-      - FE_SERVERS=fe1:172.20.80.2:9010,fe2:172.20.80.3:9010,fe3:172.20.80.4:9010
-      - BE_ADDR=172.20.80.6:9050
+      - FE_SERVERS=fe1:${FE01_HOST}:9010,fe2:${FE02_HOST}:9010,fe3:${FE03_HOST}:9010
+      - BE_ADDR=${BE02_HOST}:9050
     #ports:
     #  - 8042:8040
     volumes:
@@ -91,7 +91,7 @@ services:
       - ./data/be-02/log:/opt/apache-doris/be/log
     networks:
       doris_net:
-        ipv4_address: 172.20.80.6
+        ipv4_address: ${BE02_HOST}
 
   docker-be-03:
     image: "apache/doris:2.0.0_alpha-be-x86_64"
@@ -102,8 +102,8 @@ services:
       - docker-fe-02
       - docker-fe-03
     environment:
-      - FE_SERVERS=fe1:172.20.80.2:9010,fe2:172.20.80.3:9010,fe3:172.20.80.4:9010
-      - BE_ADDR=172.20.80.7:9050
+      - FE_SERVERS=fe1:${FE01_HOST}:9010,fe2:${FE02_HOST}:9010,fe3:${FE03_HOST}:9010
+      - BE_ADDR=${BE03_HOST}:9050
     #ports:
     #  - 8043:8040
     volumes:
@@ -112,7 +112,7 @@ services:
       - ./data/be-03/log:/opt/apache-doris/be/log
     networks:
       doris_net:
-        ipv4_address: 172.20.80.7
+        ipv4_address: ${BE03_HOST}
 
   nginx:
     image: nginx:1.19.2-alpine
@@ -134,9 +134,9 @@ services:
       - docker-be-03
     networks:
       doris_net:
-        ipv4_address: 172.20.80.8
+        ipv4_address: ${NGINX_HOST}
 networks:
   doris_net:
     ipam:
       config:
-        - subnet: 172.20.80.0/24
+        - subnet: ${SUBNET}
