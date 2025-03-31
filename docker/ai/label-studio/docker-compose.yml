@@ -1,0 +1,57 @@
+version: "3.9"
+services:
+  nginx:
+    image: heartexlabs/label-studio:latest
+    ports:
+      - "8080:8085"
+      - "8081:8086"
+    depends_on:
+      - app
+    environment:
+      - LABEL_STUDIO_HOST=${LABEL_STUDIO_HOST:-}
+    volumes:
+      - ./mydata:/label-studio/data:rw
+      - ./deploy/nginx/certs:/certs:ro
+    #      - ./deploy/my.conf:/etc/nginx/nginx.conf
+    command: nginx
+
+  app:
+    stdin_open: true
+    tty: true
+    image: heartexlabs/label-studio:latest
+    expose:
+      - "8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_DB=default
+      - POSTGRE_NAME=postgres
+      - POSTGRE_USER=postgres
+      - POSTGRE_PASSWORD=dalong
+      - POSTGRE_PORT=5432
+      - POSTGRE_HOST=db
+      - LABEL_STUDIO_HOST=${LABEL_STUDIO_HOST:-}
+      - JSON_LOG=1
+    volumes:
+      - ./mydata:/label-studio/data:rw
+    command: label-studio-uwsgi
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "19001:19001"
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    command: server --console-address :19001 --quiet /data
+  db:
+    image: postgres:16
+    hostname: db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=dalong
+    volumes:
+      - ${POSTGRES_DATA_DIR:-./postgres-data}:/var/lib/postgresql/data
+      - ./deploy/pgsql/certs:/var/lib/postgresql/certs:ro
