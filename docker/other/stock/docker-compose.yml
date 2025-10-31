@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  instock:
+    image: instock:latest
+    user: root
+    privileged: true
+    container_name: InStock
+    ports:
+      - 9988:9988
+    environment:
+      - db_host=10.0.0.27
+      - db_user=root
+      - db_password=Ysj666666
+      - db_database=instockdb
+      - db_port=3306
