@@ -1,0 +1,24 @@
+services:
+  starrocks:
+    container_name: starrocks
+    hostname: starrocks
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 8644:9030
+      - 8645:8030
+      - 8646:8040
+    volumes:
+      - ./fe/meta:/data/deploy/starrocks/fe/meta
+      - ./be/storage:/data/deploy/starrocks/be/storage
+      - ./udf_files:/data/deploy/starrocks/udf_files
+    stdin_open: true
+    tty: true
+    image: starrocks/allin1-ubuntu:3.1-latest
+    # 内存设置
+    #deploy:
+    #  resources:
+    #    limits:
+    #      cpus: 0.3
+    #      memory: 16G
